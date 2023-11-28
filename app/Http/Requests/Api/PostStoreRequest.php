@@ -4,14 +4,14 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class PostStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -19,13 +19,19 @@ class CategoryRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+
+
     public function rules(): array
     {
+        $user_id = auth()->user()->id;
+
         return [
-            //
-            'name' => 'required|string|min:1|max:255|unique:categories',
-            'slug' => 'required|string|min:1|max:255|unique:categories',
-            'status' => 'required|boolean'
+            'name' => 'required|string|min:1|max:255',
+            'slug' => 'required|string|min:1|max:255|unique:posts',
+            'extract' => 'required|string|min:1',
+            'body' => 'required|string|min:1',
+            'category_id' => 'required|exists:categories,id',
+            'user_id' => $user_id
         ];
     }
 }

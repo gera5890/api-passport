@@ -4,14 +4,14 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class PostUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,9 +23,6 @@ class CategoryRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|string|min:1|max:255|unique:categories',
-            'slug' => 'required|string|min:1|max:255|unique:categories',
-            'status' => 'required|boolean'
         ];
     }
 }
